@@ -22,7 +22,7 @@ log.info('App starting...');
 //
 // THIS SECTION IS NOT REQUIRED
 //-------------------------------------------------------------------
-let template = []
+let template = [];
 if (process.platform === 'darwin') {
   // OS X
   const name = app.getName();
@@ -40,6 +40,35 @@ if (process.platform === 'darwin') {
       },
     ]
   })
+}
+
+if(process.platform === 'win'){
+  const name = app.getName();
+  template.push({
+    label: name,
+    submenu: [
+      {
+        label: 'About ' + name,
+        role: 'about'
+      },
+      {
+        label: 'Check for updates',
+        click(){
+          console.log(process.platform);
+          debugger;
+          autoUpdater.checkForUpdates()
+        }
+      },
+      {
+        label: 'Quit',
+        accelerator: 'Control+W',
+        click() {
+          app.quit();
+        }
+      },
+    ]
+  })
+
 }
 
 

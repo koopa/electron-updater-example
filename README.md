@@ -1,6 +1,6 @@
 This repo contains the **bare minimum code** to have an auto-updating Electron app using [`electron-updater`](https://github.com/electron-userland/electron-builder/tree/master/packages/electron-updater) with releases stored on GitHub.
 
-**NOTE:** If you want to run through this whole process, you will need to fork this repo on GitHub and replace all instances of `iffy` with your GitHub username before doing the following steps.
+**NOTE:** If you want to run through this whole process, you will need to fork this repo on GitHub and replace all instances of `koopa` with your GitHub username before doing the following steps.
 
 1. For macOS, you will need a code-signing certificate.
     
@@ -15,7 +15,7 @@ This repo contains the **bare minimum code** to have an auto-updating Electron a
             "build": {
                 "publish": [{
                     "provider": "github",
-                    "owner": "iffy",
+                    "owner": "koopa",
                     "repo": "electron-updater-example"
                 }],
                 ...
@@ -38,9 +38,9 @@ This repo contains the **bare minimum code** to have an auto-updating Electron a
 
         ./publish.sh
 
-6. Release the release on GitHub by going to <https://github.com/iffy/electron-updater-example/releases>, editing the release and clicking "Publish release."
+6. Release the release on GitHub by going to <https://github.com/koopa/electron-updater-example/releases>, editing the release and clicking "Publish release."
 
-7. Download and install the app from <https://github.com/iffy/electron-updater-example/releases>.
+7. Download and install the app from <https://github.com/koopa/electron-updater-example/releases>.
 
 8. Update the version in `package.json`, commit and push to GitHub.
 

@@ -1,10 +1,12 @@
 #!/bin/sh
-
-if [ -z "$GH_TOKEN" ]; then
-    echo "You must set the GH_TOKEN environment variable."
-    echo "See README.md for more details."
+[ -z "$GH_TOKEN" ] && {
+    echo "no GH_TOKEN set, aborting."
     exit 1
-fi
+}
 
 # This will build, package and upload the app to GitHub.
-node_modules/.bin/build --win --mac -p always
+if uname -a | grep Darwin &> /dev/null; then
+    node_modules/.bin/build --x64 --mac -p always
+else
+    node_modules/.bin/build --ia32 --win -p always
+fi
