@@ -89,7 +89,15 @@ function sendStatusToWindow(text) {
   win.webContents.send('message', text);
 }
 function createDefaultWindow() {
-  win = new BrowserWindow();
+  win = new BrowserWindow({
+    name: "ea-todo",
+    width: 1200,
+    height: 800,
+    skipTaskbar: true,
+    toolbar: false,
+    // frame: false,
+  });
+  win.setMenu(null);
   debugger;
   win.webContents.openDevTools();
 
@@ -125,21 +133,8 @@ autoUpdater.on('update-downloaded', (ev, info) => {
 });
 app.on('ready', function() {
   const win = createDefaultWindow();
-  setTimeout(()=>{
-    const menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-// Create the Menu
-    setTimeout(()=>{
-      win.setMenu(menu);
-    }, 2000)
-  }, 2000);
-//  if(!isMac){
-//    win.setMenu(menu);
-//  } else {
-//    Menu.setApplicationMenu(menu);
-//  }
-
-
+  // const menu = Menu.buildFromTemplate(template);
+  // Menu.setApplicationMenu(menu);
 });
 app.on('window-all-closed', () => {
   debugger;
