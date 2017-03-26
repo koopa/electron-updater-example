@@ -4,7 +4,8 @@
 const {app, BrowserWindow, Menu, protocol, ipcMain} = require('electron');
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
-
+const platform = require('os').platform();
+const isMac = platform === 'Darwin';
 //-------------------------------------------------------------------
 // Logging
 //
@@ -23,6 +24,7 @@ log.info('App starting...');
 // THIS SECTION IS NOT REQUIRED
 //-------------------------------------------------------------------
 let template = [];
+console.log(platform);
 if (process.platform === 'darwin') {
   // OS X
   const name = app.getName();
@@ -68,7 +70,6 @@ if(process.platform === 'win'){
       },
     ]
   })
-
 }
 
 
@@ -91,6 +92,7 @@ function createDefaultWindow() {
   win = new BrowserWindow();
   debugger;
   win.webContents.openDevTools();
+
   win.on('closed', () => {
     win = null;
   });
@@ -122,12 +124,17 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   sendStatusToWindow('Update downloaded; will install in 5 seconds');
 });
 app.on('ready', function() {
-  debugger;
+  const win = createDefaultWindow();
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+//  if(!isMac){
+//    win.setMenu(menu);
+//  } else {
+//    Menu.setApplicationMenu(menu);
+//  }
 
-  createDefaultWindow();
+
 });
 app.on('window-all-closed', () => {
   debugger;
@@ -161,11 +168,11 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   // In your application, you don't need to wait 5 seconds.
   // You could call autoUpdater.quitAndInstall(); immediately
   setTimeout(function() {
-    autoUpdater.quitAndInstall();  
+   //autoUpdater.quitAndInstall();
   }, 5000)
 });
 
 app.on('ready', function()  {
   debugger;
-  autoUpdater.checkForUpdates();
+//  autoUpdater.checkForUpdates();
 });
