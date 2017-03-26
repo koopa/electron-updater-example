@@ -5,7 +5,7 @@ const {app, BrowserWindow, Menu, protocol, ipcMain} = require('electron');
 const platform = require('os').platform();
 const isMac = platform === 'Darwin';
 const log = require('electron-log');
-const {autoUpdater} = require("electron-upd§ater");
+const {autoUpdater} = require("electron-updater");
 //-------------------------------------------------------------------
 // Logging
 //
@@ -133,8 +133,9 @@ autoUpdater.on('update-downloaded', (ev, info) => {
 });
 app.on('ready', function() {
   const win = createDefaultWindow();
-  // const menu = Menu.buildFromTemplate(template);
-  // Menu.setApplicationMenu(menu);
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+  autoUpdater.checkForUpdates();
 });
 app.on('window-all-closed', () => {
   debugger;
@@ -173,7 +174,6 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   }, 15000)
 });
 
-//
 //
 // app.on('ready', function()  {
 //   debugger;
