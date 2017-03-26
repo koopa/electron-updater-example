@@ -89,6 +89,7 @@ function sendStatusToWindow(text) {
 }
 function createDefaultWindow() {
   win = new BrowserWindow();
+  debugger;
   win.webContents.openDevTools();
   win.on('closed', () => {
     win = null;
@@ -97,24 +98,31 @@ function createDefaultWindow() {
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
+  debugger;
   sendStatusToWindow('Checking for update...');
 })
 autoUpdater.on('update-available', (ev, info) => {
+  debugger;
   sendStatusToWindow('Update available.');
 })
 autoUpdater.on('update-not-available', (ev, info) => {
+  debugger;
   sendStatusToWindow('Update not available.');
 })
 autoUpdater.on('error', (ev, err) => {
+  debugger;
   sendStatusToWindow('Error in auto-updater.');
 })
 autoUpdater.on('download-progress', (ev, progressObj) => {
+  debugger;
   sendStatusToWindow('Download progress...');
 })
 autoUpdater.on('update-downloaded', (ev, info) => {
+  debugger;
   sendStatusToWindow('Update downloaded; will install in 5 seconds');
 });
 app.on('ready', function() {
+  debugger;
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
@@ -122,6 +130,7 @@ app.on('ready', function() {
   createDefaultWindow();
 });
 app.on('window-all-closed', () => {
+  debugger;
   app.quit();
 });
 
