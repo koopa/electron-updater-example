@@ -2,10 +2,10 @@
 // See LICENSE for details.
 
 const {app, BrowserWindow, Menu, protocol, ipcMain} = require('electron');
-const log = require('electron-log');
-const {autoUpdater} = require("electron-updater");
 const platform = require('os').platform();
 const isMac = platform === 'Darwin';
+const log = require('electron-log');
+const {autoUpdater} = require("electron-upd§ater");
 //-------------------------------------------------------------------
 // Logging
 //
@@ -125,9 +125,14 @@ autoUpdater.on('update-downloaded', (ev, info) => {
 });
 app.on('ready', function() {
   const win = createDefaultWindow();
-  // Create the Menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+  setTimeout(()=>{
+    const menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
+// Create the Menu
+    setTimeout(()=>{
+      win.setMenu(menu);
+    }, 2000)
+  }, 2000);
 //  if(!isMac){
 //    win.setMenu(menu);
 //  } else {
@@ -168,11 +173,14 @@ autoUpdater.on('update-downloaded', (ev, info) => {
   // In your application, you don't need to wait 5 seconds.
   // You could call autoUpdater.quitAndInstall(); immediately
   setTimeout(function() {
-   //autoUpdater.quitAndInstall();
-  }, 5000)
+    debugger;
+    autoUpdater.quitAndInstall();
+  }, 15000)
 });
 
-app.on('ready', function()  {
-  debugger;
-//  autoUpdater.checkForUpdates();
-});
+//
+//
+// app.on('ready', function()  {
+//   debugger;
+// //  autoUpdater.checkForUpdates();
+// });
